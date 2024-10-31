@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <cstdlib>
 #include <conio.h>
@@ -42,18 +41,13 @@ void logo(int l)
         )";
       }
 }
-void MaximizeConsole()
-{
-    HWND consoleWindow = GetConsoleWindow(); // Get the console window handle
-    ShowWindow(consoleWindow, SW_MAXIMIZE);  // Maximize the console window
-}
 int main()
 {
     logo(1);
     srand((unsigned) time(NULL));
     kolor(12);cout<<" Zanim zaczniesz grac, upewnij sie ze okno jest zmaksymalizowane !\n Wcisnij dowolny klawisz aby kontynuowac...";getch();
-    MaximizeConsole();
-    kolor(11);cout<<"\nWybierz poziom trudnosci:\n"; logo(2);
+
+    kolor(11);cout<<"\nWybierz poziom trudnoœci:\n"; logo(2);
 
     return 0;
 }
