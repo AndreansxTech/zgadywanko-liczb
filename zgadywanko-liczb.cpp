@@ -1,16 +1,19 @@
 #include <iostream>
 #include <cstdlib>
-#include <conio.h>
 #include <time.h>
+#include <conio.h>
 #include <windows.h>
+#include <ctype.h>
 using namespace std;
 HANDLE color=GetStdHandle(STD_OUTPUT_HANDLE);
+char wybor=0;int randomowa=0;int liczba,proba=1;
 
 void kolor(int kolor)
 {
     SetConsoleTextAttribute(color,kolor);
 }
-void logo(int l)
+
+void inf(int l)
 {
     if (l==1)
     {
@@ -36,29 +39,86 @@ void logo(int l)
   ____     _              _        ___  __                        _  __   __                         _ ___  __
  |_  /__ _| |___ _ ___ __(_)      | __|/  \                      / |/  \ /  \                       / | __|/  \
   / // _` | / / '_/ -_|_-<_       |__ \ () |                     | | () | () |                      | |__ \ () |
- /___\__,_|_\_\_| \___/__(_)      |___/\__/                      |_|\__/ \__/                       |_|___/\__/
-
-        )";
+ /___\__,_|_\_\_| \___/__(_)      |___/\__/                      |_|\__/ \__/                       |_|___/\__/)";
+      }
+      else if (l==3)
+      {
+          kolor(14);cout<<"\n[ ";
+          kolor(12);cout<<"!";
+          kolor(14);cout<<" ] ";
+      }
+      else if (l==4)
+      {
+            kolor(7);cout<<"\n[ ";
+            kolor(2);cout<<"OK";
+            kolor(7);cout<<" ]  ";
       }
 }
+void wybranie()
+{
+    kolor(11);cout<<"\nWybierz poziom trudnosci: "; kolor(159); cout<<"[   ]\b\b\b"; wybor=getch(); cout<<wybor<<endl; kolor(7);
+    if (wybor=='1')
+    {
+        inf(4);kolor(7);cout<<"Wybrales poziom latwy "; kolor(7);
+    }
+    else if (wybor=='2')
+    {
+        inf(4);kolor(7);cout<<"Wybrales poziom sredni "; kolor(7);
+    }
+    else if (wybor=='3')
+    {
+        inf(4);kolor(7);cout<<"Wybrales poziom trudny "; kolor(7);
+    }
+    else
+    {
+        cout<<endl;inf(3);kolor(12);cout<<"Nie ma takiego poziomu trudnosci !"; kolor(7);
+        wybranie();
+    }
+}
+
 int main()
 {
-    logo(1);
+    inf(1);
     srand((unsigned) time(NULL));
-    kolor(12);cout<<" Zanim zaczniesz grac, upewnij sie ze okno jest zmaksymalizowane !\n Wcisnij dowolny klawisz aby kontynuowac...";getch();
-    logo(2);
-    kolor(11);cout<<"\nWybierz poziom trudnosci: "; kolor(121);char wybor; cout<<"[ ]\b\b"; wybor=getch();
+    kolor(12);cout<<"\n Zanim zaczniesz grac, upewnij sie ze okno jest zmaksymalizowane !\n Wcisnij dowolny klawisz aby kontynuowac...";getch();
+    inf(2); wybranie();
     switch (wybor)
     {
     case '1':
-        kolor(11);cout<<"\nWybrales poziom latwy";break;
-    
-    default:
-        kolor(12);cout<<"\nNie ma takiego poziomu trudnosci";
-        break;
-    }
-     cout<<wybor; kolor(11);
-    
+        randomowa=rand()%50+1; cout<<randomowa<<endl;
 
+        while(liczba!=randomowa)
+        {
+        liczba=0;
+            kolor(14);cout<<"To twoja "<<proba<<" proba\n";
+            proba+=1;
+            kolor(7);cout<<"\nZgadnij liczbe z zakresu 1-50: "; kolor(13); cout<<"[  ]\b\b\b"; cin>>liczba;kolor(007);
+            if (cin.fail())
+            {
+                inf(3);cout<<" Podaj poprawna liczbe: "; kolor(13); cin>>liczba;kolor(007);cout<<"\0";
+            }
+            else
+            {
+                if (liczba>randomowa)
+                {
+                    inf(3);kolor(13);cout<<"To za duzo "; kolor(7);cout<<"\v";
+                }
+                else if (liczba<randomowa)
+                {
+                    inf(3);kolor(13);cout<<"To za malo "; kolor(7);cout<<"\v";
+                }
+                else
+                {
+                    inf(4);kolor(13);cout<<"Brawo ! Zgadles liczbe !"; kolor(7);cout<<"\v";exit(0);
+                }
+            }
+        }
+        break;
+
+    default:
+        break;
+        exit(0);
+    }
+    //kolor(11);cout<<"\nWybierz poziom trudnosci: "; kolor(121);char wybor=0; cout<<"[   ]\b\b\b"; wybor=getch(); cout<<wybor;
     return 0;
 }
