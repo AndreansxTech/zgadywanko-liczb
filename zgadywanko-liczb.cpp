@@ -46,8 +46,19 @@ int main()
     logo(1);
     srand((unsigned) time(NULL));
     kolor(12);cout<<" Zanim zaczniesz grac, upewnij sie ze okno jest zmaksymalizowane !\n Wcisnij dowolny klawisz aby kontynuowac...";getch();
-
-    kolor(11);cout<<"\nWybierz poziom trudnoœci:\n"; logo(2);
+    logo(2);
+    kolor(11);cout<<"\nWybierz poziom trudnosci: "; kolor(121);char wybor; cout<<"[ ]\b\b"; wybor=getch();
+    switch (wybor)
+    {
+    case '1':
+        kolor(11);cout<<"\nWybrales poziom latwy";break;
+    
+    default:
+        kolor(12);cout<<"\nNie ma takiego poziomu trudnosci";
+        break;
+    }
+     cout<<wybor; kolor(11);
+    
 
     return 0;
 }
