@@ -1,124 +1,221 @@
 #include <iostream>
+#include <string>
 #include <cstdlib>
-#include <time.h>
-#include <conio.h>
+#include <ctime>
 #include <windows.h>
-#include <ctype.h>
 using namespace std;
-HANDLE color=GetStdHandle(STD_OUTPUT_HANDLE);
-char wybor=0;int randomowa=0;int liczba,proba=1;
-
-void kolor(int kolor)
+void kolorek(int kolor)
+{SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), kolor);}
+int obliczPunkty(int proby)
 {
-    SetConsoleTextAttribute(color,kolor);
+    return max(100 -(proby-1)*10,10);
 }
-
-void inf(int l)
+void logo(int l)
 {
     if (l==1)
     {
-    kolor(14);cout<<R"(
- _____                _                           _        _ _          _
-/ _  / __ _  __ _  __| |_   ___      ____ _ _ __ (_) ___  | (_) ___ ___| |__
-\// / / _` |/ _` |/ _` | | | \ \ /\ / / _` | '_ \| |/ _ \ | | |/ __|_  / '_ \
- / //\ (_| | (_| | (_| | |_| |\ V  V / (_| | | | | |  __/ | | | (__ / /| |_) |
-/____/\__, |\__,_|\__,_|\__, | \_/\_/ \__,_|_| |_|_|\___| |_|_|\___/___|_.__/
-      |___/             |___/
+    kolorek(4);cout<<R"(
+ @@@@@@@@  @@@@@@@   @@@@@@  @@@@@@@  @@@ @@@ @@@  @@@  @@@  @@@@@@  @@@  @@@ @@@ @@@@@@@@
+      @@! !@@       @@!  @@@ @@!  @@@ @@! !@@ @@!  @@!  @@! @@!  @@@ @@!@!@@@ @@! @@!
+    @!!   !@! @!@!@ @!@!@!@! @!@  !@!  !@!@!  @!!  !!@  @!@ @!@!@!@! @!@@!!@! !!@ @!!!:!
+  !!:     :!!   !!: !!:  !!! !!:  !!!   !!:    !:  !!:  !!  !!:  !!! !!:  !!! !!: !!:
+ :.::.: :  :: :: :   :   : : :: :  :    .:      ::.:  :::    :   : : ::    :  :   : :: :::
+)";Sleep(500);cout<<R"(
+ @@@      @@@  @@@@@@@ @@@@@@@@ @@@@@@@
+ @@!      @@! !@@           @@! @@!  @@@
+ @!!      !!@ !@!         @!!   @!@!@!@
+ !!:      !!: :!!       !!:     !!:  !!!
+ : ::.: : :    :: :: : :.::.: : :: : ::
+)";Sleep(500);
+    }
+    else if (l==2)
+    {
+        kolorek(4);cout<<R"(
+ @@@  @@@  @@@@@@  @@@  @@@ @@@ @@@@@@@@  @@@@@@@       @@@@@@@  @@@@@@@  @@@ @@@      @@@
+ @@!  !@@ @@!  @@@ @@!@!@@@ @@! @@!      !@@           !@@       @@!  @@@ @@! !@@      @@@
+ @!@@!@!  @!@  !@! @!@@!!@! !!@ @!!!:!   !@!           !@! @!@!@ @!@!!@!   !@!@!       !@!
+ !!: :!!  !!:  !!! !!:  !!! !!: !!:      :!!           :!!   !!: !!: :!!    !!:
+  :   :::  : :. :  ::    :  :   : :: :::  :: :: :       :: :: :   :   : :   .:         :.:
+
+)";
+    }
+    else if (l==3)
+    {
+        kolorek(2);
+        cout<<R"(
+
+@@@  @@@  @@@ @@@ @@@  @@@@@@@  @@@@@@@   @@@@@@  @@@
+@@!  @@!  @@! @@! !@@ !@@       @@!  @@@ @@!  @@@ @@!
+@!!  !!@  @!@  !@!@!  !@! @!@!@ @!@!!@!  @!@!@!@! @!!
+ !:  !!:  !!    !!:   :!!   !!: !!: :!!  !!:  !!! !!:
+  ::.:  :::     .:     :: :: :   :   : :  :   : : : ::.: :
 
 
-      )";kolor(7);
-      }
-      else if (l==2)
-      {
-          cout<<R"(
-                    _     _         _                   ___     ___            _      _    ____    _____            _
-                   / |   | |   __ _| |___ __ ___  _    |_  )   / __|_ _ ___ __| |_ _ (_)  |__ /   |_   _| _ _  _ __| |_ _ _  _
-                   | |_  | |__/ _` |  _\ V  V / || |    / / _  \__ \ '_/ -_) _` | ' \| |   |_ \_    | || '_| || / _` | ' \ || |
-                   |_(_) |____\__,_|\__|\_/\_/ \_, |   /___(_) |___/_| \___\__,_|_||_|_|  |___(_)   |_||_|  \_,_\__,_|_||_\_, |
-                                               |__/                                                                       |__/
-  ____     _              _        ___  __                        _  __   __                         _ ___  __
- |_  /__ _| |___ _ ___ __(_)      | __|/  \                      / |/  \ /  \                       / | __|/  \
-  / // _` | / / '_/ -_|_-<_       |__ \ () |                     | | () | () |                      | |__ \ () |
- /___\__,_|_\_\_| \___/__(_)      |___/\__/                      |_|\__/ \__/                       |_|___/\__/)";
-      }
-      else if (l==3)
-      {
-          kolor(14);cout<<"\n[ ";
-          kolor(12);cout<<"!";
-          kolor(14);cout<<" ] ";
-      }
-      else if (l==4)
-      {
-            kolor(7);cout<<"\n[ ";
-            kolor(2);cout<<"OK";
-            kolor(7);cout<<" ]  ";
-      }
+ @@@@@@@  @@@@@@@   @@@@@@   @@@@@@@ @@@@@@@@     @@@    @@@
+!@@       @@!  @@@ @@!  @@@ !@@           @@!    @@@@    @@@
+!@! @!@!@ @!@!!@!  @!@!@!@! !@!         @!!       !@!    !@!
+:!!   !!: !!: :!!  !!:  !!! :!!       !!:         !!!
+ :: :: :   :   : :  :   : :  :: :: : :.::.: :     ::     :.:
+
+        )";
+    }
+    else if (l==4)
+    {
+        kolorek(2);
+        cout<<R"(
+
+@@@  @@@  @@@ @@@ @@@  @@@@@@@  @@@@@@@   @@@@@@  @@@
+@@!  @@!  @@! @@! !@@ !@@       @@!  @@@ @@!  @@@ @@!
+@!!  !!@  @!@  !@!@!  !@! @!@!@ @!@!!@!  @!@!@!@! @!!
+ !:  !!:  !!    !!:   :!!   !!: !!: :!!  !!:  !!! !!:
+  ::.:  :::     .:     :: :: :   :   : :  :   : : : ::.: :
+
+
+ @@@@@@@  @@@@@@@   @@@@@@   @@@@@@@ @@@@@@@@     @@@@@@     @@@
+!@@       @@!  @@@ @@!  @@@ !@@           @@!    @@   @@@    @@@
+!@! @!@!@ @!@!!@!  @!@!@!@! !@!         @!!        .!!@!     !@!
+:!!   !!: !!: :!!  !!:  !!! :!!       !!:         !!:
+ :: :: :   :   : :  :   : :  :: :: : :.::.: :    :.:: :::    :.:
+
+        )";
+    }
+    else if (l==5)
+    {
+        kolorek(11);
+        cout<<R"(
+                                 d8,
+                               `8P
+
+  88bd88b d8888b  88bd8b,d88b   88b .d888b,
+  88P'  `d8b_,dP  88P'`?8P'?8b  88P ?8b,
+ d88     88b     d88  d88  88P d88    `?8b
+d88'     `?888P'd88' d88'  88bd88' `?888P'
+                                               )";
+    }
+    else if (l==6)
+    {
+        cout<<R"(
+ ______    __  __   ___   __    ______   ________       ____
+/_____/\  /_/\/_/\ /__/\ /__/\ /_____/\ /_______/\     /___/\
+\:::_ \ \ \:\ \:\ \\::\_\\  \ \\:::_ \ \\::: _  \ \    \_::\ \
+ \:(_) ) )_\:\ \:\ \\:. `-\  \ \\:\ \ \ \\::(_)  \ \     \::\ \
+  \: __ `\ \\:\ \:\ \\:. _    \ \\:\ \ \ \\:: __  \ \    _\: \ \__
+   \ \ `\ \ \\:\_\:\ \\. \`-\  \ \\:\/.:| |\:.\ \  \ \  /__\: \__/\
+    \_\/ \_\/ \_____\/ \__\/ \__\/ \____/_/ \__\/\__\/  \________\/
+
+        )";
+    }
+    else if (l==7)
+    {
+        cout<<R"(
+ ______    __  __   ___   __    ______   ________       _____
+/_____/\  /_/\/_/\ /__/\ /__/\ /_____/\ /_______/\     /_____/\
+\:::_ \ \ \:\ \:\ \\::\_\\  \ \\:::_ \ \\::: _  \ \    \:::_:\ \
+ \:(_) ) )_\:\ \:\ \\:. `-\  \ \\:\ \ \ \\::(_)  \ \       _\:\|
+  \: __ `\ \\:\ \:\ \\:. _    \ \\:\ \ \ \\:: __  \ \     /::_/__
+   \ \ `\ \ \\:\_\:\ \\. \`-\  \ \\:\/.:| |\:.\ \  \ \    \:\____/\
+    \_\/ \_\/ \_____\/ \__\/ \__\/ \____/_/ \__\/\__\/     \_____\/
+
+        )";
+    }
+    else if (l==8)
+    {
+        cout<<R"(
+ ______    __  __   ___   __    ______   ________       ______
+/_____/\  /_/\/_/\ /__/\ /__/\ /_____/\ /_______/\     /_____/\
+\:::_ \ \ \:\ \:\ \\::\_\\  \ \\:::_ \ \\::: _  \ \    \:::_:\ \
+ \:(_) ) )_\:\ \:\ \\:. `-\  \ \\:\ \ \ \\::(_)  \ \      /_\:\ \
+  \: __ `\ \\:\ \:\ \\:. _    \ \\:\ \ \ \\:: __  \ \     \::_:\ \
+   \ \ `\ \ \\:\_\:\ \\. \`-\  \ \\:\/.:| |\:.\ \  \ \    /___\:\ '
+    \_\/ \_\/ \_____\/ \__\/ \__\/ \____/_/ \__\/\__\/    \______/
+
+        )";
+    }
+    else if (l==9)
+    {
+        cout<<R"(
+ ______    __  __   ___   __    ______   ________       __   __
+/_____/\  /_/\/_/\ /__/\ /__/\ /_____/\ /_______/\     /__/\/__/\
+\:::_ \ \ \:\ \:\ \\::\_\\  \ \\:::_ \ \\::: _  \ \    \  \ \: \ \__
+ \:(_) ) )_\:\ \:\ \\:. `-\  \ \\:\ \ \ \\::(_)  \ \    \::\_\::\/_/\
+  \: __ `\ \\:\ \:\ \\:. _    \ \\:\ \ \ \\:: __  \ \    \_:::   __\/
+   \ \ `\ \ \\:\_\:\ \\. \`-\  \ \\:\/.:| |\:.\ \  \ \        \::\ \
+    \_\/ \_\/ \_____\/ \__\/ \__\/ \____/_/ \__\/\__\/         \__\/
+
+        )";
+    }
 }
-void wybranie()
-{
-    kolor(11);cout<<"\nWybierz poziom trudnosci: "; kolor(159); cout<<"[   ]\b\b\b"; wybor=getch(); cout<<wybor<<endl; kolor(7);
-    if (wybor=='1')
-    {
-        inf(4);kolor(7);cout<<"Wybrales poziom latwy "; kolor(7);
-    }
-    else if (wybor=='2')
-    {
-        inf(4);kolor(7);cout<<"Wybrales poziom sredni "; kolor(7);
-    }
-    else if (wybor=='3')
-    {
-        inf(4);kolor(7);cout<<"Wybrales poziom trudny "; kolor(7);
-    }
-    else
-    {
-        cout<<endl;inf(3);kolor(12);cout<<"Nie ma takiego poziomu trudnosci !"; kolor(7);
-        wybranie();
-    }
-}
-
 int main()
 {
-    inf(1);
-    srand((unsigned) time(NULL));
-    kolor(12);cout<<"\n Zanim zaczniesz grac, upewnij sie ze okno jest zmaksymalizowane !\n Wcisnij dowolny klawisz aby kontynuowac...";getch();
-    inf(2); wybranie();
-    switch (wybor)
-    {
-    case '1':
-        randomowa=rand()%50+1; cout<<randomowa<<endl;
+    srand((unsigned)time(NULL));
 
-        while(liczba!=randomowa)
+    string gracz1,gracz2;
+    int punkty1=0,punkty2=0;
+    logo(1);kolorek(7);
+    cout <<"   Podaj imie pierwszego gracza: ";
+    getline(cin,gracz1);
+    cout<<"   Podaj imie drugiego gracza: "; getline(cin,gracz2);
+    system("cls");
+    for (int runda=1;runda<=4;runda++)
+    {
+        kolorek(11);
+        logo(runda+5);
+        cout<<"\n=== RUNDA "<<runda<<" ===\n";
+        kolorek(7);
+        int liczba=rand()%100+1;int proba;
+        bool odgadniete=false; int lprob=0;
+        string aktualnygracz=(runda%2== 1)?gracz1 :gracz2;
+        while (!odgadniete)
         {
-        liczba=0;
-            kolor(14);cout<<"To twoja "<<proba<<" proba\n";
-            proba+=1;
-            kolor(7);cout<<"\nZgadnij liczbe z zakresu 1-50: "; kolor(13); cout<<"[  ]\b\b\b"; cin>>liczba;kolor(007);
-            if (cin.fail())
+            kolorek(10);cout<<"\nKolej gracza: "<<aktualnygracz<<endl;
+            kolorek(7);
+            cout<<"Podaj liczbe (1-100): ";
+            cin>>proba;lprob++;
+
+            if (proba==liczba)
             {
-                inf(3);cout<<" Podaj poprawna liczbe: "; kolor(13); cin>>liczba;kolor(007);cout<<"\0";
+                kolorek(13);
+                cout<<"Brawo! "<<aktualnygracz<<" odgadl(a) liczbe!\n";
+
+                int zdobytepunkty=obliczPunkty(lprob);
+                if (aktualnygracz==gracz1)
+                    punkty1+=zdobytepunkty;
+                else
+                    punkty2+= zdobytepunkty;
+
+                cout<<"Zdobyte punkty w tej rundzie: "<<zdobytepunkty<<"\n";
+                kolorek(7);odgadniete=true;
+            }
+            else if (proba<liczba)
+            {
+                kolorek(12);cout<<"Za malo!\n";kolorek(7);
             }
             else
             {
-                if (liczba>randomowa)
-                {
-                    inf(3);kolor(13);cout<<"To za duzo "; kolor(7);cout<<"\v";
-                }
-                else if (liczba<randomowa)
-                {
-                    inf(3);kolor(13);cout<<"To za malo "; kolor(7);cout<<"\v";
-                }
-                else
-                {
-                    inf(4);kolor(13);cout<<"Brawo ! Zgadles liczbe !"; kolor(7);cout<<"\v";exit(0);
-                }
-            }
+                kolorek(12);cout<<"Za duzo!\n";kolorek(7); }
+            aktualnygracz =(aktualnygracz==gracz1)?gracz2:gracz1;
         }
-        break;
-
-    default:
-        break;
-        exit(0);
+        kolorek(14);
+        cout<<"\nAktualny stan punktow:\n";
+        cout<<gracz1<<": "<< punkty1<<" punktow\n";
+        cout<<gracz2<<": "<< punkty2<<" punktow\n";
+        kolorek(7);Sleep(2000);system("cls");
     }
-    //kolor(11);cout<<"\nWybierz poziom trudnosci: "; kolor(121);char wybor=0; cout<<"[   ]\b\b\b"; wybor=getch(); cout<<wybor;
-    return 0;
+    kolorek(11);logo(2);
+    kolorek(14);
+    cout<<gracz1<<": "<<punkty1 <<" punktow\n";
+    cout<<gracz2<<": "<<punkty2<<" punktow\n\n";
+    kolorek(13);
+    if (punkty1>punkty2)
+    {
+        logo(3);cout<<"Zwyciezca jest "<<gracz1<<"! Gratulacje!\n"; }
+    else if (punkty2>punkty1)
+    {
+        logo(4);cout<<"Zwyciezca jest "<<gracz2<<"! Gratulacje!\n"; }
+    else
+    {
+        logo(5);
+         cout<<"Remis! Gratulacje dla obu graczy!\n";
+    }
+    kolorek(7);return 0;
 }
